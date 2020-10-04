@@ -33,15 +33,15 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Installing Mycroft 
       run: |
-        sudo snap install mycroft --beta
+        bash start-mycroft.sh
     - name: Starting Mycroft 
       run: |
         ls -a
         cd ~
         ls -a
         # sudo groupadd -g 1001 mycroft
-        sudo useradd -M -u 1001 -g 1001 mycroft
-        sudo mycroft
+        # sudo useradd -M -u 1001 -g 1001 mycroft
+        # sudo mycroft
 
     - name: Test with pytest
       run: |
