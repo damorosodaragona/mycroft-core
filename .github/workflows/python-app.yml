@@ -34,7 +34,7 @@ jobs:
     - name: Installing Mycroft 
       run: |
         bash dev_setup_pipeline.sh
-    - shell: bash
+      shell: bash
     - name: Starting Mycroft 
       run: |
         ls -a
