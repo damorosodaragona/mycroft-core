@@ -33,7 +33,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Installing Mycroft 
       run: |
-        snap install mycroft --beta
+        sudo snap install mycroft --beta
     - name: Starting Mycroft 
       run: |
         ls -a
