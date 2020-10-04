@@ -199,13 +199,13 @@ your environment.'
 
      echo -e "$HIGHLIGHT Y - Adding Mycroft commands to your PATH $RESET"
 
-        if [[ ! -f ~/.profile_mycroft ]] ; then
+     if [[ ! -f ~/.profile_mycroft ]] ; then
             # Only add the following to the .profile if .profile_mycroft
             # doesn't exist, indicating this script has not been run before
             echo '' >> ~/.profile
             echo '# include Mycroft commands' >> ~/.profile
             echo 'source ~/.profile_mycroft' >> ~/.profile
-        fi
+     fi
 
         echo "
 # WARNING: This file may be replaced in future, do not customize.
@@ -214,8 +214,6 @@ if [ -d \"${TOP}/bin\" ] ; then
     PATH=\"\$PATH:${TOP}/bin\"
 fi" > ~/.profile_mycroft
         echo -e "Type ${CYAN}mycroft-help$RESET to see available commands."
-    else
-        echo -e "$HIGHLIGHT N - PATH left unchanged $RESET"
     
 
     # Create a link to the 'skills' folder.
