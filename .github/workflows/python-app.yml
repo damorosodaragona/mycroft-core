@@ -33,9 +33,10 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Installing Mycroft 
       run: |
+        cd ~/
+        git clone https://github.com/damorosodaragona/mycroft-core.git
         cd mycroft-core
         bash dev_setup.sh
-
     - name: Starting Mycroft 
       run: |
         mycroft-start all
