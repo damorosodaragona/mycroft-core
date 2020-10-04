@@ -23,8 +23,9 @@ set -Ee
 
 cd $(dirname $0)
 TOP=$(pwd -L)
-
-case $TERM in xterm) TERM=konsole xterm-256color konsole-256color st-256color dvtm-256color;; esac
+if [ -e /usr/share/terminfo/x/xterm-256color ] && [ "$COLORTERM" == "xfce4-terminal" ]; then
+    export TERM=xterm-256color
+fi
 
 function clean_mycroft_files() {
     echo '
