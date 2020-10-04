@@ -24,7 +24,7 @@ set -Ee
 cd $(dirname $0)
 TOP=$(pwd -L)
 
-case $TERM in xterm) TERM=xterm-256color;; esac
+case $TERM in xterm) TERM=konsole xterm-256color konsole-256color st-256color dvtm-256color;; esac
 
 function clean_mycroft_files() {
     echo '
