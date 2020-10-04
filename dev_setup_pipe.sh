@@ -23,6 +23,7 @@ set -Ee
 
 cd $(dirname $0)
 TOP=$(pwd -L)
+if not contains -- $TERM xterm konsole xterm-256color konsole-256color st-256color dvtm-256color
 
 function clean_mycroft_files() {
     echo '
@@ -52,7 +53,6 @@ function show_help() {
     echo '
 Usage: dev_setup.sh [options]
 Prepare your environment for running the mycroft-core services.
-
 Options:
     --clean                 Remove files and folders created by this script
     -h, --help              Show this message
@@ -171,31 +171,66 @@ This script is designed to make working with Mycroft easy.  During this
 first run of dev_setup we will ask you a few questions to help setup
 your environment.'
     sleep 0.5
-    echo -e "$HIGHLIGHT N - using an unstable branch $RESET"
-    branch=dev
-   
+    echo "
+Do you want to run on 'master' or against a dev branch?  Unless you are
+a developer modifying mycroft-core itself, you should run on the
+'master' branch.  It is updated bi-weekly with a stable release.
+  Y)es, run on the stable 'master' branch
+  N)o, I want to run unstable branches"
+    if get_YN ; then
+        echo -e "$HIGHLIGHT Y - using 'master' branch $RESET"
+        branch=master
+        git checkout ${branch}
+    else
+        echo -e "$HIGHLIGHT N - using an unstable branch $RESET"
+        branch=dev
+    fi
 
     sleep 0.5
-    
-    echo -e "$HIGHLIGHT N - update manually using 'git pull' $RESET"
-    autoupdate=false
-    
+    echo "
+Mycroft is actively developed and constantly evolving.  It is recommended
+that you update regularly.  Would you like to automatically update
+whenever launching Mycroft?  This is highly recommended, especially for
+those running against the 'master' branch.
+  Y)es, automatically check for updates
+  N)o, I will be responsible for keeping Mycroft updated."
+    if get_YN ; then
+        echo -e "$HIGHLIGHT Y - update automatically $RESET"
+        autoupdate=true
+    else
+        echo -e "$HIGHLIGHT N - update manually using 'git pull' $RESET"
+        autoupdate=false
+    fi
 
     #  Pull down mimic source?  Most will be happy with just the package
     if [[ $opt_forcemimicbuild == false && $opt_skipmimicbuild == false ]] ; then
         sleep 0.5
-        
-     echo -e "$HIGHLIGHT N - skip Mimic build $RESET"
-     opt_skipmimicbuild=true
-       
+        echo '
+Mycroft uses its Mimic technology to speak to you.  Mimic can run both
+locally and from a server.  The local Mimic is more robotic, but always
+available regardless of network connectivity.  It will act as a fallback
+if unable to contact the Mimic server.
+However, building the local Mimic is time consuming -- it can take hours
+on slower machines.  This can be skipped, but Mycroft will be unable to
+talk if you lose network connectivity.  Would you like to build Mimic
+locally?'
+        if get_YN ; then
+            echo -e "$HIGHLIGHT Y - Mimic will be built $RESET"
+        else
+            echo -e "$HIGHLIGHT N - skip Mimic build $RESET"
+            opt_skipmimicbuild=true
+        fi
     fi
 
     echo
     # Add mycroft-core/bin to the .bashrc PATH?
     sleep 0.5
     echo '
-
-     echo -e "$HIGHLIGHT Y - Adding Mycroft commands to your PATH $RESET"
+There are several Mycroft helper commands in the bin folder.  These
+can be added to your system PATH, making it simpler to use Mycroft.
+Would you like this to be added to your PATH in the .profile?'
+    if get_YN ; then
+        echo -e "$HIGHLIGHT Y - Adding Mycroft commands to your PATH $RESET"
 
         if [[ ! -f ~/.profile_mycroft ]] ; then
             # Only add the following to the .profile if .profile_mycroft
@@ -237,7 +272,14 @@ fi" > ~/.profile_mycroft
 
     # Add PEP8 pre-commit hook
     sleep 0.5
-
+    echo '
+(Developer) Do you want to automatically check code-style when submitting code.
+If unsure answer yes.
+'
+    if get_YN ; then
+        echo 'Will install PEP8 pre-commit hook...'
+        INSTALL_PRECOMMIT_HOOK=true
+    fi
 
     # Save options
     echo '{"use_branch": "'$branch'", "auto_update": '$autoupdate'}' > .dev_opts.json
