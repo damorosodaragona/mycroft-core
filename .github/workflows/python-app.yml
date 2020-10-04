@@ -33,8 +33,9 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
        - name: Start Mycroft 
          run: |
-           mycroft-start vktest -t skill-to-test
+           mycroft-start all
 
        - name: Test with pytest
          run: |
-           mycroft-core vk
+            mycroft-start vktest -t skill-to-test
+
