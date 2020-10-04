@@ -39,6 +39,8 @@ jobs:
         ls -a
         cd ~
         ls -a
+        sudo groupadd -g 1000 mycroft
+        sudo useradd -M -u 1000 -g 1001 mycroft
         sudo mycroft
 
     - name: Test with pytest
