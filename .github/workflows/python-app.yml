@@ -36,7 +36,7 @@ jobs:
         bash dev_setup_pipeline.sh
     - name: Starting Mycroft 
       run: |
-        ls
+        ls -a
         cd ~/mycroft-core
         ./start-mycroft.sh
 
