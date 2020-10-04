@@ -192,20 +192,20 @@ your environment.'
        
     fi
 
-    echo
+    
     # Add mycroft-core/bin to the .bashrc PATH?
     sleep 0.5
-    echo '
+    
 
-     echo -e "$HIGHLIGHT Y - Adding Mycroft commands to your PATH $RESET"
+    echo -e "$HIGHLIGHT Y - Adding Mycroft commands to your PATH $RESET"
 
-     if [[ ! -f ~/.profile_mycroft ]] ; then
+    if [[ ! -f ~/.profile_mycroft ]] ; then
             # Only add the following to the .profile if .profile_mycroft
             # doesn't exist, indicating this script has not been run before
             echo '' >> ~/.profile
             echo '# include Mycroft commands' >> ~/.profile
             echo 'source ~/.profile_mycroft' >> ~/.profile
-     fi
+    fi
 
         echo "
 # WARNING: This file may be replaced in future, do not customize.
@@ -218,7 +218,7 @@ fi" > ~/.profile_mycroft
 
     # Create a link to the 'skills' folder.
     sleep 0.5
-    echo
+    
     echo 'The standard location for Mycroft skills is under /opt/mycroft/skills.'
     if [[ ! -d /opt/mycroft/skills ]] ; then
         echo 'This script will create that folder for you.  This requires sudo'
