@@ -34,7 +34,6 @@ jobs:
     - name: Installing Mycroft 
       run: |
         cd ~/
-        git clone https://github.com/damorosodaragona/mycroft-core.git
         cd mycroft-core
         bash dev_setup_pipeline.sh
     - name: Starting Mycroft 
