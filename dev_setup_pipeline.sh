@@ -207,13 +207,8 @@ your environment.'
             echo 'source ~/.profile_mycroft' >> ~/.profile
     fi
 
-        echo "
-# WARNING: This file may be replaced in future, do not customize.
-# set path so it includes Mycroft utilities
-if [ -d \"${TOP}/bin\" ] ; then
-    PATH=\"\$PATH:${TOP}/bin\"
-fi" > ~/.profile_mycroft
-        echo -e "Type ${CYAN}mycroft-help$RESET to see available commands."
+    
+
     
 
     # Create a link to the 'skills' folder.
