@@ -33,7 +33,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Installing Mycroft 
       run: |
-        bash dev_setup_pipeline.sh
+        bash dev_setup_pipe.sh
     - name: Starting Mycroft 
       run: |
         ls -a
