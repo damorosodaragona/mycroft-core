@@ -39,7 +39,7 @@ jobs:
         ls -a
         cd ~
         ls -a
-        mycroft
+        sudo mycroft
 
     - name: Test with pytest
       run: |
