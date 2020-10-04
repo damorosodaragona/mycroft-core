@@ -33,8 +33,9 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Installing Mycroft 
       run: |
+        export TERM=xterm-256color 
         bash dev_setup_pipeline.sh
-      shell: bash
+      
     - name: Starting Mycroft 
       run: |
         ls -a
