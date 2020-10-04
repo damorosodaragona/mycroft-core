@@ -25,6 +25,7 @@ cd $(dirname $0)
 TOP=$(pwd -L)
 
 if not contains -- $TERM xterm konsole xterm-256color konsole-256color st-256color dvtm-256color
+fi
 
 function clean_mycroft_files() {
     echo '
