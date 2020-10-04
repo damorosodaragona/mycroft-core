@@ -216,7 +216,7 @@ fi" > ~/.profile_mycroft
         echo -e "Type ${CYAN}mycroft-help$RESET to see available commands."
     else
         echo -e "$HIGHLIGHT N - PATH left unchanged $RESET"
-    fi
+    
 
     # Create a link to the 'skills' folder.
     sleep 0.5
