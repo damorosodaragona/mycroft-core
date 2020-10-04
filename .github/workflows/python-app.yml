@@ -38,14 +38,15 @@ jobs:
       
     - name: Starting Mycroft 
       run: |
+        cd /home/runner/work/mycroft-core/
         ls -a
-        cd ~
-        ls -a
+        ./start-mycroft.sh all
         # sudo groupadd -g 1001 mycroft
         # sudo useradd -M -u 1001 -g 1001 mycroft
         # sudo mycroft
 
     - name: Test with pytest
       run: |
-        mycroft-start vktest -t skill-to-test
+        cd /home/runner/work/mycroft-core/
+        ./start-mycroft.sh vktest -t skill-to-test
 
